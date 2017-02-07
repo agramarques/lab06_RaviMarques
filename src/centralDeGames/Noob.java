@@ -16,6 +16,8 @@ public class Noob extends Usuario{
 		else{
 			this.setCreditos(this.getCreditos() - precoComDesconto);
 			this.getComprados().put(novo.getNome(), novo);
+			double novoX2p = this.getX2p() + (10*novo.getPreco());
+			this.setX2p(novoX2p);
 		}	
 	}
 	

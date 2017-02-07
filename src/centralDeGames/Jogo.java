@@ -10,24 +10,42 @@ public class Jogo {
 	private int quantPartidas;
 	private int quantZeradas;
 	private HashSet<Jogabilidade> modos;
+	private TiposDeJogo tipo;
 	
-	public Jogo(String nome) {
+	public Jogo(String nome, TiposDeJogo tipo) {
 		this.nome = nome;
+		this.setTipo(tipo);
 		modos = new HashSet<>();
 		maiorScore = 0;
 		quantPartidas = 0;
 		quantZeradas = 0;
 	}	
 
-	public int registraJogada(int score, boolean zerou){
+	public double registraJogada(int score, boolean zerou){
+		boolean foiMaior = false;
 		if (score > maiorScore){
 			maiorScore = score;
+			foiMaior = true;
 		}
 		quantPartidas++;
 		if(zerou){
 			quantZeradas++;
 		}
-		return score; //esperando forma de calcular x2p
+		switch (this.getTipo()) {
+		case RPG:
+			return 10*quantPartidas;
+		case Luta:
+			if (foiMaior){
+				return (double)score/1000;
+			}
+			else{
+				return 0;
+			}
+		case Plataforma:
+			return 20*quantZeradas;
+		default:
+			return 0;
+		}
 	}
 	
 	public void adicionaModo(Jogabilidade modo){
@@ -68,6 +86,14 @@ public class Jogo {
 
 	public int getMaiorScore() {
 		return maiorScore;
+	}
+
+	public TiposDeJogo getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TiposDeJogo tipo) {
+		this.tipo = tipo;
 	}
 
 	@Override
