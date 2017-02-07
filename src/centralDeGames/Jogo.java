@@ -23,6 +23,10 @@ public class Jogo {
 		if (score > maiorScore){
 			maiorScore = score;
 		}
+		quantPartidas++;
+		if(zerou){
+			quantZeradas++;
+		}
 		return score; //esperando forma de calcular x2p
 	}
 	
@@ -65,6 +69,38 @@ public class Jogo {
 	public int getMaiorScore() {
 		return maiorScore;
 	}
+
+	@Override
+	public String toString() {
+		return "Jogo [nome=" + nome + ", preco=" + preco + ", maiorScore=" + maiorScore + ", quantPartidas="
+				+ quantPartidas + ", quantZeradas=" + quantZeradas + ", modos=" + modos + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Jogo other = (Jogo) obj;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		return true;
+	}
+	
 	
 	
 }

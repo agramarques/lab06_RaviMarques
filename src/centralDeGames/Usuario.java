@@ -49,6 +49,36 @@ public abstract class Usuario {
 	public void setCreditos(double creditos) {
 		this.creditos = creditos;
 	}
+
+	@Override
+	public String toString() {
+		return "Usuario [nome=" + nome + ", login=" + login + ", creditos=" + creditos + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((login == null) ? 0 : login.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		if (login == null) {
+			if (other.login != null)
+				return false;
+		} else if (!login.equals(other.login))
+			return false;
+		return true;
+	}
 	
 	
 	
