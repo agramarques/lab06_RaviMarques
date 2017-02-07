@@ -8,6 +8,7 @@ public abstract class Usuario {
 	private String login;
 	private HashMap<String, Jogo> comprados;
 	private double creditos;
+	private int x2p;
 
 	public Usuario(String nome) {
 		this.nome = nome;
@@ -48,6 +49,14 @@ public abstract class Usuario {
 
 	public void setCreditos(double creditos) {
 		this.creditos = creditos;
+	}
+
+	public int getX2p() {
+		return x2p;
+	}
+
+	public void setX2p(int x2p) {
+		this.x2p = x2p;
 	}
 
 	@Override

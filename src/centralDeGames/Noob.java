@@ -4,6 +4,7 @@ public class Noob extends Usuario{
 
 	public Noob(String nome) {
 		super(nome);
+		this.setX2p(0);
 	}
 
 	@Override

@@ -4,6 +4,7 @@ public class Veterano extends Usuario{
 
 	public Veterano(String nome) {
 		super(nome);
+		this.setX2p(1000);
 	}
 
 	@Override
