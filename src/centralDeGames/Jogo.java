@@ -98,8 +98,7 @@ public class Jogo {
 
 	@Override
 	public String toString() {
-		return "Jogo [nome=" + nome + ", preco=" + preco + ", maiorScore=" + maiorScore + ", quantPartidas="
-				+ quantPartidas + ", quantZeradas=" + quantZeradas + ", modos=" + modos + "]";
+		return "+" + this.getNome() + '-' + this.getTipo() + ":\n" + "==> Jogou " + this.getQuantPartidas() + "vez(es)\n" + "==> Zerou " + this.getQuantZeradas() + "vez(es)\n" + "==> Maior score: " + this.getMaiorScore(); 
 	}
 
 	@Override

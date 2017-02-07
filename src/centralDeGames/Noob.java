@@ -20,5 +20,10 @@ public class Noob extends Usuario{
 			this.setX2p(novoX2p);
 		}	
 	}
+
+	@Override
+	public String toString() {
+		return this.getLogin() + '\n' + this.getNome() + " - Jogador Noob\n" + "Lista de Jogos:\n" + this.getComprados() + "\n\n" + "Total de preco dos jogos: R$" + this.calculaPrecoTotalJogos();  
+	}
 	
 }

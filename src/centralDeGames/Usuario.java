@@ -37,6 +37,14 @@ public abstract class Usuario {
 		}
 	}
 
+	public double calculaPrecoTotalJogos(){	//retorna valor total que o usuario possui em jogos comprados
+		double total = 0;
+		for(String j:comprados.keySet()){
+			total += comprados.get(j).getPreco();
+		}
+		return total;
+	}
+	
 	public String getLogin() {
 		return login;
 	}
@@ -70,9 +78,7 @@ public abstract class Usuario {
 	}
 
 	@Override
-	public String toString() {
-		return "Usuario [nome=" + nome + ", login=" + login + ", creditos=" + creditos + "]";
-	}
+	public abstract String toString();
 
 	@Override
 	public int hashCode() {

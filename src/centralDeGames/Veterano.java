@@ -21,6 +21,10 @@ public class Veterano extends Usuario{
 		}	
 	}
 
-	
+	@Override
+	public String toString() {
+		return this.getLogin() + '\n' + this.getNome() + " - Jogador Veterano\n" + "Lista de Jogos:\n" + this.getComprados() + "\n\n" + "Total de preco dos jogos: R$" + this.calculaPrecoTotalJogos();  
+	}
+
 
 }
