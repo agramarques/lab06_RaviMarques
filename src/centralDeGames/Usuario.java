@@ -39,8 +39,8 @@ public abstract class Usuario {
 
 	public double calculaPrecoTotalJogos(){	//retorna valor total que o usuario possui em jogos comprados
 		double total = 0;
-		for(String j:comprados.keySet()){
-			total += comprados.get(j).getPreco();
+		for(Jogo j:comprados.values()){
+			total += j.getPreco();
 		}
 		return total;
 	}
@@ -65,7 +65,7 @@ public abstract class Usuario {
 		return creditos;
 	}
 
-	public void setCreditos(double creditos) {
+	protected void setCreditos(double creditos) {
 		this.creditos = creditos;
 	}
 
@@ -73,7 +73,7 @@ public abstract class Usuario {
 		return x2p;
 	}
 
-	public void setX2p(double x2p) {
+	protected void setX2p(double x2p) {
 		this.x2p = x2p;
 	}
 
