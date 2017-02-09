@@ -19,8 +19,18 @@ public abstract class Usuario {
 		creditos = 0;
 	}
 	
+	/**
+	 * inclui jogo informado na conta do usuario, se este possuir creditos suficientes para compra-lo
+	 * @param novo - Jogo a ser incluido
+	 * @throws Exception
+	 */
 	public abstract void comprarJogo(Jogo novo) throws Exception;
 	
+	/**
+	 * credita valor informado na conta do usuario
+	 * @param valor espera um valor não-negativo (Reais)
+	 * @throws Exception
+	 */
 	public void colocarCredito(double valor) throws Exception{
 		if (valor < 0){
 			throw new Exception("valor invalido");
@@ -30,6 +40,13 @@ public abstract class Usuario {
 		}
 	}
 	
+	/**
+	 * delega registraJogada de Jogo (se o usuario pertencer o jogo em questao)
+	 * @param nomeDoJogo
+	 * @param score
+	 * @param zerou
+	 * @throws Exception
+	 */
 	public void registraJogada(String nomeDoJogo, int score, boolean zerou) throws Exception{
 		if(!comprados.containsKey(nomeDoJogo)){
 			throw new Exception("usuario nao possui jogo informado");

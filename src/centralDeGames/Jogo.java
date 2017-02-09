@@ -24,6 +24,12 @@ public class Jogo {
 		quantZeradas = 0;
 	}	
 
+	/**
+	 * usada para obter os pontos x2p de cada jogada
+	 * @param score
+	 * @param zerou
+	 * @return pontos x2p
+	 */
 	public int registraJogada(int score, boolean zerou){
 		boolean foiMaior = false;
 		if (score > maiorScore){
