@@ -2,7 +2,7 @@ package centralDeGames;
 
 public class Prov {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception{
 		Loja minha = new Loja();
 		Usuario u = new Noob("Ravi");
 		u.setLogin("ravi");

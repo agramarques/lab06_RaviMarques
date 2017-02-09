@@ -12,7 +12,10 @@ public class Jogo {
 	private HashSet<Jogabilidade> modos;
 	private TiposDeJogo tipo;
 	
-	public Jogo(String nome, TiposDeJogo tipo) {
+	public Jogo(String nome, TiposDeJogo tipo) throws Exception {
+		if(nome == null || nome.trim().equals("")){
+			throw new Exception("nome invalido");
+		}
 		this.nome = nome;
 		this.setTipo(tipo);
 		modos = new HashSet<>();
@@ -21,7 +24,7 @@ public class Jogo {
 		quantZeradas = 0;
 	}	
 
-	public double registraJogada(int score, boolean zerou){
+	public int registraJogada(int score, boolean zerou){
 		boolean foiMaior = false;
 		if (score > maiorScore){
 			maiorScore = score;
@@ -33,16 +36,21 @@ public class Jogo {
 		}
 		switch (this.getTipo()) {
 		case RPG:
-			return 10*quantPartidas;
+			return 10;
 		case Luta:
 			if (foiMaior){
-				return (double)score/1000;
+				return score/1000;
 			}
 			else{
 				return 0;
 			}
 		case Plataforma:
-			return 20*quantZeradas;
+			if(zerou){
+				return 20;
+			}
+			else{
+				return 0;
+			}
 		default:
 			return 0;
 		}
@@ -94,6 +102,10 @@ public class Jogo {
 
 	public void setTipo(TiposDeJogo tipo) {
 		this.tipo = tipo;
+	}
+
+	public HashSet<Jogabilidade> getModos() {
+		return modos;
 	}
 
 	@Override

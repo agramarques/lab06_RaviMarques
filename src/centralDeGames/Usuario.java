@@ -8,9 +8,12 @@ public abstract class Usuario {
 	private String login;
 	private HashMap<String, Jogo> comprados;
 	private double creditos;
-	private double x2p;
+	private int x2p;
 
-	public Usuario(String nome) {
+	public Usuario(String nome) throws Exception{
+		if (nome == null || nome.trim().equals("")){
+			throw new Exception("nome invalido");
+		}
 		this.nome = nome;
 		comprados = new HashMap<>();
 		creditos = 0;
@@ -32,7 +35,7 @@ public abstract class Usuario {
 			throw new Exception("usuario nao possui jogo informado");
 		}
 		else{
-			double acrescimoX2p = comprados.get(nomeDoJogo).registraJogada(score, zerou);
+			int acrescimoX2p = comprados.get(nomeDoJogo).registraJogada(score, zerou);
 			this.setX2p(this.getX2p()+acrescimoX2p);
 		}
 	}
@@ -69,11 +72,11 @@ public abstract class Usuario {
 		this.creditos = creditos;
 	}
 
-	public double getX2p() {
+	public int getX2p() {
 		return x2p;
 	}
 
-	protected void setX2p(double x2p) {
+	protected void setX2p(int x2p) {
 		this.x2p = x2p;
 	}
 

@@ -2,7 +2,7 @@ package centralDeGames;
 
 public class Veterano extends Usuario{
 
-	public Veterano(String nome) {
+	public Veterano(String nome) throws Exception {
 		super(nome);
 		this.setX2p(1000);
 	}
@@ -16,7 +16,7 @@ public class Veterano extends Usuario{
 		else{
 			this.setCreditos(this.getCreditos() - precoComDesconto);
 			this.getComprados().put(novo.getNome(), novo);
-			double novoX2p = this.getX2p() + (15*novo.getPreco());
+			int novoX2p = this.getX2p() + (int)(15*novo.getPreco());
 			this.setX2p(novoX2p);
 		}	
 	}
