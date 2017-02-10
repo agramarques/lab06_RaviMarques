@@ -29,6 +29,22 @@ public class Loja {
 				System.out.println(e.getMessage());
 			}
 		}
+		
+		public void upgradeUsuario(Usuario user) throws Exception{
+			if(!usuarios.containsKey(user.getLogin())){
+				throw new Exception("usuario nao cadastrado");
+			}
+			if(user.getClass().equals(Veterano.class)){
+				throw new Exception("usuario ja eh veterano");
+			}
+			if(user.getX2p() < 1000){
+				throw new Exception("usuario nao tem pontos suficientes para upgrade");
+			}
+			Veterano novo = new Veterano(user.getNome());
+			novo.copiarUsuario(user);	//copia as informacoes do usuario
+			usuarios.remove(user.getLogin());	//remove usuario antigo (noob)
+			usuarios.put(novo.getLogin(), novo); //inclui novo usuario (veterano)
+		}
 
 		@Override
 		public String toString() {
