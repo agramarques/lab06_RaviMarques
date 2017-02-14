@@ -16,7 +16,7 @@ public class NoobTest {
 
 	@Test
 	public void testComprarJogo() throws Exception {
-		Jogo jogo = new Jogo("first", TiposDeJogo.Luta);
+		Jogo jogo = new Luta("first");
 		jogo.setPreco(100);
 		user.colocarCredito(200);
 		user.comprarJogo(jogo);
@@ -26,7 +26,7 @@ public class NoobTest {
 
 	@Test
 	public void testComprarJogoExc() throws Exception {
-		Jogo jogo = new Jogo("first", TiposDeJogo.Luta);
+		Jogo jogo = new Luta("first");
 		jogo.setPreco(100);
 		user.colocarCredito(50);
 		try {
@@ -60,11 +60,11 @@ public class NoobTest {
 	
 	@Test
 	public void testCalculaPrecoTotalJogos() throws Exception {
-		Jogo jogo = new Jogo("first", TiposDeJogo.Luta);
+		Jogo jogo = new Luta("first");
 		jogo.setPreco(100);
 		user.colocarCredito(400);
 		user.comprarJogo(jogo);
-		Jogo novo = new Jogo("second", TiposDeJogo.Luta);
+		Jogo novo = new Luta("second");
 		novo.setPreco(150);
 		user.comprarJogo(novo);
 		assertEquals(250, user.calculaPrecoTotalJogos(), 0.01);

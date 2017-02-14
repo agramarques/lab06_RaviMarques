@@ -9,7 +9,7 @@ public class Luta extends Jogo {
 
 	@Override
 	public int calculaX2p(int score, boolean zerou) {
-		if (score>this.getMaiorScore()){
+		if (score >= this.getMaiorScore()){
 			return score/1000;
 		}
 		else{

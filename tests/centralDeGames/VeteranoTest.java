@@ -16,7 +16,7 @@ public class VeteranoTest { //obs.: como veterano e noob herdam tudo de usuario,
 
 	@Test
 	public void testComprarJogo() throws Exception {
-		Jogo jogo = new Jogo("first", TiposDeJogo.Luta);
+		Jogo jogo = new Luta("first");
 		jogo.setPreco(100);
 		user.colocarCredito(200);
 		user.comprarJogo(jogo);
@@ -26,7 +26,7 @@ public class VeteranoTest { //obs.: como veterano e noob herdam tudo de usuario,
 
 	@Test
 	public void testComprarJogoExc() throws Exception {
-		Jogo jogo = new Jogo("first", TiposDeJogo.Luta);
+		Jogo jogo = new Luta("first");
 		jogo.setPreco(100);
 		user.colocarCredito(50);
 		try {
