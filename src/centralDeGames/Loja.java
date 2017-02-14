@@ -22,14 +22,11 @@ public class Loja {
 			}
 		}
 
-		/**
-		 * vende jogo para o usuario identificado por seu login
-		 * @param login
-		 * @param jogo A interface com o usuario deve garantir que cada objeto jogo passado seja unico (nova instancia) para evitar multiplos acessos ao mesmo objeto
-		 */
-		public void venderJogo(String login, Jogo jogo){
+		public void venderJogo(String login, String nome, double preco, TiposDeJogo tipo) throws Exception{
+			Jogo novo = new Jogo(nome, tipo);
+			novo.setPreco(preco);
 			try {
-				usuarios.get(login).comprarJogo(jogo);
+				usuarios.get(login).comprarJogo(novo);
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}

@@ -18,6 +18,7 @@ public class Jogo {
 		}
 		this.nome = nome;
 		this.setTipo(tipo);
+		preco = 0;
 		modos = new HashSet<>();
 		maiorScore = 0;
 		quantPartidas = 0;
