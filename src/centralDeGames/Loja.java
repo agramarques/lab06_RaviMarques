@@ -22,8 +22,26 @@ public class Loja {
 			}
 		}
 
+		/**
+		 * Recebe os atributos de um jogo a ser comprado e cria o objeto, a fim de evitar multiplos acessos ao mesmo objeto
+		 * ja que se fosse passado o objeto, seria por referencia, assim mais de um usuario poderiam comprar o mesmo jogo (mesma instancia)
+		 * @param login
+		 * @param nome
+		 * @param preco
+		 * @param tipo usado para definir em tempo de execucao o tipo de jogo a ser criado
+		 * @throws Exception
+		 */
 		public void venderJogo(String login, String nome, double preco, TiposDeJogo tipo) throws Exception{
-			Jogo novo = new Jogo(nome, tipo);
+			Jogo novo;
+			if(tipo == TiposDeJogo.RPG){
+				novo = new RPG(nome);
+			}
+			else if (tipo == TiposDeJogo.RPG){
+				novo = new Luta(nome);
+			}
+			else{
+				novo = new Plataforma(nome);
+			}
 			novo.setPreco(preco);
 			try {
 				usuarios.get(login).comprarJogo(novo);

@@ -2,7 +2,7 @@ package centralDeGames;
 
 import java.util.HashSet;
 
-public class Jogo {
+public abstract class Jogo {
 	
 	private String nome;
 	private double preco;
@@ -12,12 +12,11 @@ public class Jogo {
 	private HashSet<Jogabilidade> modos;
 	private TiposDeJogo tipo;
 	
-	public Jogo(String nome, TiposDeJogo tipo) throws Exception {
+	public Jogo(String nome) throws Exception {
 		if(nome == null || nome.trim().equals("")){
 			throw new Exception("nome invalido");
 		}
 		this.nome = nome;
-		this.setTipo(tipo);
 		preco = 0;
 		modos = new HashSet<>();
 		maiorScore = 0;
@@ -32,36 +31,17 @@ public class Jogo {
 	 * @return pontos x2p
 	 */
 	public int registraJogada(int score, boolean zerou){
-		boolean foiMaior = false;
 		if (score > maiorScore){
 			maiorScore = score;
-			foiMaior = true;
 		}
 		quantPartidas++;
 		if(zerou){
 			quantZeradas++;
 		}
-		switch (this.getTipo()) {
-		case RPG:
-			return 10;
-		case Luta:
-			if (foiMaior){
-				return score/1000;
-			}
-			else{
-				return 0;
-			}
-		case Plataforma:
-			if(zerou){
-				return 20;
-			}
-			else{
-				return 0;
-			}
-		default:
-			return 0;
-		}
+		return this.calculaX2p(score, zerou);
 	}
+	
+	public abstract int calculaX2p(int score, boolean zerou);
 	
 	public void adicionaModo(Jogabilidade modo){
 		modos.add(modo);
