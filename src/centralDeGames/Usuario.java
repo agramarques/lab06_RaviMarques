@@ -67,9 +67,9 @@ public abstract class Usuario {
 	
 	public void copiarUsuario(Usuario old){
 		this.comprados = old.getComprados();
-		this.creditos = old.getCreditos();
-		this.x2p = old.getX2p();
-		this.login = old.getLogin();
+		this.setCreditos(old.getCreditos());
+		this.setX2p(old.getX2p());
+		this.setLogin(old.getLogin());
 	}
 	
 	public String getLogin() {
