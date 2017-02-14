@@ -30,6 +30,10 @@ public class Loja {
 			}
 		}
 		
+		public Usuario buscaUsuario(String login){
+			return usuarios.get(login);
+		}
+		
 		public void upgradeUsuario(Usuario user) throws Exception{
 			if(!usuarios.containsKey(user.getLogin())){
 				throw new Exception("usuario nao cadastrado");
