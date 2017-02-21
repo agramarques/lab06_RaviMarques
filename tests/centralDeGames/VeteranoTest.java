@@ -11,7 +11,7 @@ public class VeteranoTest { //obs.: como veterano e noob herdam tudo de usuario,
 	
 	@Before
 	public void criaNoob() throws Exception{
-		user = new Veterano("joao");
+		user = new Veterano("joao", "joao");
 	}
 
 	@Test

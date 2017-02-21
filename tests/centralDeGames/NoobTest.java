@@ -11,7 +11,7 @@ public class NoobTest {
 	
 	@Before
 	public void criaNoob() throws Exception{
-		user = new Noob("joao");
+		user = new Noob("joao", "joao");
 	}
 
 	@Test

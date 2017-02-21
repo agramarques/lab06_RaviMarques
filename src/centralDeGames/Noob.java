@@ -2,8 +2,8 @@ package centralDeGames;
 
 public class Noob extends Usuario{
 
-	public Noob(String nome) throws Exception{
-		super(nome);
+	public Noob(String nome, String login) throws Exception{
+		super(nome, login);
 		this.setX2p(0);
 	}
 

@@ -2,12 +2,16 @@ package centralDeGames;
 
 import java.util.HashMap;
 
-public class Loja {
+public class LojaController {
 
 		private HashMap<String, Usuario> usuarios;
+		private FactoryDeUsuario factory;
+		private FactoryDeJogos gameFactory;
 
-		public Loja() {
+		public LojaController() {
 			usuarios = new HashMap<>();
+			factory = new FactoryDeUsuario();
+			gameFactory = new FactoryDeJogos();
 		}
 		
 		public void adicionaUsuario (Usuario u){
@@ -20,6 +24,26 @@ public class Loja {
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
+		}
+		
+		public Usuario criaUsuario (String nome, String login, String nivel){
+			Usuario retorno = null;
+			try {
+				retorno = factory.getUsuario(nivel, nome, login);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			return retorno;
+		}
+		
+		public Jogo criaJogo(String nome, double preco, TiposDeJogo tipo, String modos){
+			Jogo retorno = null;
+			try {
+				retorno = gameFactory.criaJogo(nome, preco, tipo, modos);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			return retorno;
 		}
 
 		/**
@@ -64,7 +88,7 @@ public class Loja {
 			if(user.getX2p() < 1000){
 				throw new Exception("usuario nao tem pontos suficientes para upgrade");
 			}
-			Veterano novo = new Veterano(user.getNome());
+			Veterano novo = new Veterano(user.getNome(), user.getLogin());
 			novo.copiarUsuario(user);	//copia as informacoes do usuario
 			usuarios.remove(user.getLogin());	//remove usuario antigo (noob)
 			usuarios.put(novo.getLogin(), novo); //inclui novo usuario (veterano)

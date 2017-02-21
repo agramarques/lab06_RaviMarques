@@ -10,11 +10,12 @@ public abstract class Usuario {
 	private double creditos;
 	private int x2p;
 
-	public Usuario(String nome) throws Exception{
-		if (nome == null || nome.trim().equals("")){
+	public Usuario(String nome, String login) throws Exception{
+		if (nome == null || nome.trim().equals("") || login == null || login.trim().equals("")){
 			throw new Exception("nome invalido");
 		}
 		this.nome = nome;
+		this.login = login;
 		comprados = new HashMap<>();
 		creditos = 0;
 	}

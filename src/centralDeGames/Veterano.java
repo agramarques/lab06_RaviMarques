@@ -2,8 +2,8 @@ package centralDeGames;
 
 public class Veterano extends Usuario{
 
-	public Veterano(String nome) throws Exception {
-		super(nome);
+	public Veterano(String nome, String login) throws Exception {
+		super(nome, login);
 		this.setX2p(1000);
 	}
 
