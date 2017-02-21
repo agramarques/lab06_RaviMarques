@@ -28,8 +28,8 @@ public class LojaFacade {
 		return controller.buscaUsuario(login);
 	}
 
-	public void upgradeUsuario(Usuario user) throws Exception {
-		controller.upgradeUsuario(user);
+	public void upgradeUsuario(String login) throws Exception {
+		controller.upgradeUsuario(login);
 	}
 
 	public String toString() {
