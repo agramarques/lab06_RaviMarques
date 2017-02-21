@@ -2,13 +2,14 @@ package centralDeGames;
 
 import java.util.HashMap;
 
-public abstract class Usuario {
+public class Usuario {
 
 	private String nome;
 	private String login;
 	private HashMap<String, Jogo> comprados;
 	private double creditos;
 	private int x2p;
+	private TipoDeUsuario status;
 
 	public Usuario(String nome, String login) throws Exception{
 		if (nome == null || nome.trim().equals("") || login == null || login.trim().equals("")){
@@ -18,6 +19,8 @@ public abstract class Usuario {
 		this.login = login;
 		comprados = new HashMap<>();
 		creditos = 0;
+		x2p = 0; //comeca como noob
+		status = new Noob();
 	}
 	
 	/**
@@ -25,7 +28,17 @@ public abstract class Usuario {
 	 * @param novo - Jogo a ser incluido
 	 * @throws Exception
 	 */
-	public abstract void comprarJogo(Jogo novo) throws Exception;
+	public void comprarJogo(Jogo novo) throws Exception{
+		double precoComDesconto = status.getPrecoComDesconto(novo); 
+		if(precoComDesconto > this.getCreditos()){
+			throw new Exception("voce nao tem credito para comprar esse jogo");
+		}
+		else{
+			this.setCreditos(this.getCreditos() - precoComDesconto);
+			this.getComprados().put(novo.getNome(), novo);
+			this.x2p += status.getAddX2p(novo);
+		}	
+	}
 	
 	/**
 	 * credita valor informado na conta do usuario
@@ -73,6 +86,14 @@ public abstract class Usuario {
 		this.setLogin(old.getLogin());
 	}
 	
+	public void upgrade(){
+		this.status = new Veterano();
+	}
+	
+	public void downgrade(){
+		this.status = new Noob();
+	}
+	
 	public String getLogin() {
 		return login;
 	}
@@ -105,8 +126,19 @@ public abstract class Usuario {
 		this.x2p = x2p;
 	}
 
+	public TipoDeUsuario getStatus() {
+		return status;
+	}
+
+	public void setStatus(TipoDeUsuario status) {
+		this.status = status;
+	}
+
+	//ajustar o toString para o Usuario geral ou incluir na interface TipoDeUsuario
 	@Override
-	public abstract String toString();
+	public String toString(){
+		return this.getLogin() + '\n' + this.getNome() + " - Jogador Veterano\n" + "Lista de Jogos:\n" + this.getComprados() + "\n\n" + "Total de preco dos jogos: R$" + this.calculaPrecoTotalJogos();
+	}
 
 	@Override
 	public int hashCode() {

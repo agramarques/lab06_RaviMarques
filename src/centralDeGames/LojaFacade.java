@@ -20,8 +20,8 @@ public class LojaFacade {
 		return controller.criaJogo(nome, preco, tipo, modos);
 	}
 
-	public void venderJogo(String login, String nome, double preco, TiposDeJogo tipo) throws Exception {
-		controller.venderJogo(login, nome, preco, tipo);
+	public void venderJogo(String login, String nome, double preco, TiposDeJogo tipo, String modos) throws Exception {
+		controller.venderJogo(login, nome, preco, tipo, modos);
 	}
 
 	public Usuario buscaUsuario(String login) {

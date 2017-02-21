@@ -55,18 +55,8 @@ public class LojaController {
 		 * @param tipo usado para definir em tempo de execucao o tipo de jogo a ser criado
 		 * @throws Exception
 		 */
-		public void venderJogo(String login, String nome, double preco, TiposDeJogo tipo) throws Exception{
-			Jogo novo;
-			if(tipo == TiposDeJogo.RPG){
-				novo = new RPG(nome);
-			}
-			else if (tipo == TiposDeJogo.RPG){
-				novo = new Luta(nome);
-			}
-			else{
-				novo = new Plataforma(nome);
-			}
-			novo.setPreco(preco);
+		public void venderJogo(String login, String nome, double preco, TiposDeJogo tipo, String modos) throws Exception{
+			Jogo novo = this.criaJogo(nome, preco, tipo, modos);
 			try {
 				usuarios.get(login).comprarJogo(novo);
 			} catch (Exception e) {
@@ -78,20 +68,22 @@ public class LojaController {
 			return usuarios.get(login);
 		}
 		
-		public void upgradeUsuario(Usuario user) throws Exception{
-			if(!usuarios.containsKey(user.getLogin())){
+		public void upgradeUsuario(String login) throws Exception{
+			if(!usuarios.containsKey(login)){
 				throw new Exception("usuario nao cadastrado");
 			}
+			Usuario user = usuarios.get(login);
 			if(user.getClass().equals(Veterano.class)){
 				throw new Exception("usuario ja eh veterano");
 			}
 			if(user.getX2p() < 1000){
 				throw new Exception("usuario nao tem pontos suficientes para upgrade");
 			}
-			Veterano novo = new Veterano(user.getNome(), user.getLogin());
+			user.upgrade();
+/*			Veterano novo = new Veterano(user.getNome(), user.getLogin());
 			novo.copiarUsuario(user);	//copia as informacoes do usuario
 			usuarios.remove(user.getLogin());	//remove usuario antigo (noob)
-			usuarios.put(novo.getLogin(), novo); //inclui novo usuario (veterano)
+			usuarios.put(novo.getLogin(), novo); //inclui novo usuario (veterano)	*/
 		}
 
 		@Override
