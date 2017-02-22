@@ -29,14 +29,14 @@ public class Usuario {
 	 * @throws Exception
 	 */
 	public void comprarJogo(Jogo novo) throws Exception{
-		double precoComDesconto = status.getPrecoComDesconto(novo); 
+		double precoComDesconto = status.getPrecoComDesconto(novo);	//chamada polimorfica 
 		if(precoComDesconto > this.getCreditos()){
 			throw new Exception("voce nao tem credito para comprar esse jogo");
 		}
 		else{
 			this.setCreditos(this.getCreditos() - precoComDesconto);
 			this.getComprados().put(novo.getNome(), novo);
-			this.x2p += status.getAddX2p(novo);
+			this.x2p += status.getAddX2p(novo);	//chamada polimorfica
 		}	
 	}
 	
@@ -56,13 +56,13 @@ public class Usuario {
 	
 	public void punir(String nomeJogo, int scoreObtido, boolean zerou){
 		Jogo jogo = comprados.get(nomeJogo);
-		int deducao = status.punir(jogo, scoreObtido, zerou);
+		int deducao = status.punir(jogo, scoreObtido, zerou);	//chamada polimorfica
 		this.x2p += deducao;
 	}
 	
 	public void recompensar(String nomeJogo, int scoreObtido, boolean zerou){
 		Jogo jogo = comprados.get(nomeJogo);
-		int acrescimo = status.recompensar(jogo, scoreObtido, zerou);
+		int acrescimo = status.recompensar(jogo, scoreObtido, zerou);	//chamada polimorfica
 		this.x2p += acrescimo;
 	}
 	
@@ -78,7 +78,7 @@ public class Usuario {
 			throw new Exception("usuario nao possui jogo informado");
 		}
 		else{
-			int acrescimoX2p = comprados.get(nomeDoJogo).registraJogada(score, zerou);
+			int acrescimoX2p = comprados.get(nomeDoJogo).registraJogada(score, zerou);	//chamada polimorfica
 			this.x2p += acrescimoX2p;	//pontua pela jogada
 			this.punir(nomeDoJogo, score, zerou);	//pune pela jogada
 			this.recompensar(nomeDoJogo, score, zerou);	//recompensa pela jogada

@@ -58,7 +58,7 @@ public class LojaController {
 		public void venderJogo(String login, String nome, double preco, TiposDeJogo tipo, String modos) throws Exception{
 			Jogo novo = this.criaJogo(nome, preco, tipo, modos);
 			try {
-				usuarios.get(login).comprarJogo(novo);
+				usuarios.get(login).comprarJogo(novo);	//chamada polimorfica
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
@@ -79,7 +79,7 @@ public class LojaController {
 			if(user.getX2p() < 1000){
 				throw new Exception("usuario nao tem pontos suficientes para upgrade");
 			}
-			user.upgrade();
+			user.upgrade();	//chamada polimorfica
 /*			Veterano novo = new Veterano(user.getNome(), user.getLogin());
 			novo.copiarUsuario(user);	//copia as informacoes do usuario
 			usuarios.remove(user.getLogin());	//remove usuario antigo (noob)
