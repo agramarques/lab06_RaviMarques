@@ -54,6 +54,18 @@ public class Usuario {
 		}
 	}
 	
+	public void punir(String nomeJogo, int scoreObtido, boolean zerou){
+		Jogo jogo = comprados.get(nomeJogo);
+		int deducao = status.punir(jogo, scoreObtido, zerou);
+		this.x2p += deducao;
+	}
+	
+	public void recompensar(String nomeJogo, int scoreObtido, boolean zerou){
+		Jogo jogo = comprados.get(nomeJogo);
+		int acrescimo = status.recompensar(jogo, scoreObtido, zerou);
+		this.x2p += acrescimo;
+	}
+	
 	/**
 	 * delega registraJogada de Jogo (se o usuario pertencer o jogo em questao)
 	 * @param nomeDoJogo
@@ -67,7 +79,9 @@ public class Usuario {
 		}
 		else{
 			int acrescimoX2p = comprados.get(nomeDoJogo).registraJogada(score, zerou);
-			this.setX2p(this.getX2p()+acrescimoX2p);
+			this.x2p += acrescimoX2p;	//pontua pela jogada
+			this.punir(nomeDoJogo, score, zerou);	//pune pela jogada
+			this.recompensar(nomeDoJogo, score, zerou);	//recompensa pela jogada
 		}
 	}
 

@@ -2,27 +2,31 @@ package centralDeGames;
 
 public class Noob implements TipoDeUsuario{
 
-//	colocar isso no metodo de Usuario
-/*	public void comprarJogo(Jogo novo) throws Exception {
-		if(precoComDesconto > this.getCreditos()){
-			throw new Exception("voce nao tem credito para comprar esse jogo");
-		}
-		else{
-			this.setCreditos(this.getCreditos() - precoComDesconto);
-			this.getComprados().put(novo.getNome(), novo);
-			int novoX2p = this.getX2p() + (int)(10*novo.getPreco());
-			this.setX2p(novoX2p);
-		}	
-	}
-*/
 	@Override
-	public void punir(int am) {
-		
+	public int punir(Jogo jogo, int scoreObtido, boolean zerou) {
+		int deducao = 0;
+		if(jogo.getModos().contains(Jogabilidade.Competitivo)){
+			deducao -= 20;
+		}
+		if(jogo.getModos().contains(Jogabilidade.Online)){
+			deducao -= 10;
+		}
+		if(jogo.getModos().contains(Jogabilidade.Cooperativo)){
+			deducao -= 50;
+		}
+		return deducao;
 	}
 
 	@Override
-	public void recompensar(int am) {
-		
+	public int recompensar(Jogo jogo, int scoreObtido, boolean zerou) {
+		int acrescimo = 0;
+		if(jogo.getModos().contains(Jogabilidade.Offline)){
+			acrescimo += 30;
+		}
+		if(jogo.getModos().contains(Jogabilidade.Multiplayer)){
+			acrescimo += 10;
+		}
+		return acrescimo;
 	}
 
 	@Override
