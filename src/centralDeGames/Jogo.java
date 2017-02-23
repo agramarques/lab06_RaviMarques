@@ -31,7 +31,7 @@ public abstract class Jogo {
 	 * @return pontos x2p
 	 */
 	public int registraJogada(int score, boolean zerou){
-		if (score > maiorScore){
+		if (score >= maiorScore){
 			maiorScore = score;
 		}
 		quantPartidas++;

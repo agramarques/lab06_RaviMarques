@@ -73,14 +73,14 @@ public class LojaController {
 		 * @throws Exception
 		 */
 		public void venderJogo(String login, String nome, double preco, String estiloJogo, String modos) throws Exception{
-			TiposDeJogo tipo;
+			TiposDeJogo tipo = TiposDeJogo.RPG;
 			if(estiloJogo.equalsIgnoreCase("rpg")){
 				tipo = TiposDeJogo.RPG;
 			}
 			else if(estiloJogo.equalsIgnoreCase("luta")){
 				tipo = TiposDeJogo.Luta;
 			}
-			else{
+			else if(estiloJogo.equalsIgnoreCase("plataforma")){
 				tipo = TiposDeJogo.Plataforma;
 			}
 			Jogo novo = this.criaJogo(nome, preco, tipo, modos);

@@ -5,11 +5,10 @@ import easyaccept.EasyAccept;
 public class LojaFacade {
 
 	private static LojaController controller = new LojaController();
-	
+
 	public static void main(String[] args){
 		args = new String[] { "centralDeGames.LojaFacade", "acceptance_test/us1.txt", "acceptance_test/us2.txt",  "acceptance_test/us3.txt" };
 		EasyAccept.main(args);
-		//System.out.println(controller.buscaUsuario("despoina.solaris").getComprados().get("Marvel vs Capcom").getModos());
 	}
 	
 	public void adicionaUsuario(Usuario u) {

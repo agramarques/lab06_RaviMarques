@@ -7,8 +7,10 @@ public class FactoryDeJogos {
 		switch (tipo) {
 		case RPG:
 			novo = new RPG(nome);
+			break;
 		case Luta:
 			novo = new Luta(nome);
+			break;
 		default:
 			novo = new Plataforma(nome);			
 		}
