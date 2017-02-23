@@ -26,10 +26,27 @@ public class LojaController {
 			}
 		}
 		
+		public double checaCredito(String login){
+			return usuarios.get(login).getCreditos();
+		}
+		
+		public int getX2p(String login){
+			return usuarios.get(login).getX2p();
+		}
+		
+		public void punir(String login, String nomeJogo, int scoreObtido, boolean zerou) throws Exception{
+			usuarios.get(login).punir(nomeJogo, scoreObtido, zerou);
+		}
+		
+		public void recompensar(String login, String nomeJogo, int scoreObtido, boolean zerou) throws Exception{
+			usuarios.get(login).recompensar(nomeJogo, scoreObtido, zerou);
+		}
+		
 		public Usuario criaUsuario (String nome, String login, String nivel){
 			Usuario retorno = null;
 			try {
 				retorno = factory.getUsuario(nivel, nome, login);
+				this.adicionaUsuario(retorno);
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
@@ -55,7 +72,17 @@ public class LojaController {
 		 * @param tipo usado para definir em tempo de execucao o tipo de jogo a ser criado
 		 * @throws Exception
 		 */
-		public void venderJogo(String login, String nome, double preco, TiposDeJogo tipo, String modos) throws Exception{
+		public void venderJogo(String login, String nome, double preco, String estiloJogo, String modos) throws Exception{
+			TiposDeJogo tipo;
+			if(estiloJogo.equalsIgnoreCase("rpg")){
+				tipo = TiposDeJogo.RPG;
+			}
+			else if(estiloJogo.equalsIgnoreCase("luta")){
+				tipo = TiposDeJogo.Luta;
+			}
+			else{
+				tipo = TiposDeJogo.Plataforma;
+			}
 			Jogo novo = this.criaJogo(nome, preco, tipo, modos);
 			try {
 				usuarios.get(login).comprarJogo(novo);	//chamada polimorfica
@@ -84,6 +111,20 @@ public class LojaController {
 			novo.copiarUsuario(user);	//copia as informacoes do usuario
 			usuarios.remove(user.getLogin());	//remove usuario antigo (noob)
 			usuarios.put(novo.getLogin(), novo); //inclui novo usuario (veterano)	*/
+		}
+		
+		public void downgradeUsuario(String login) throws Exception{
+			if(!usuarios.containsKey(login)){
+				throw new Exception("usuario nao cadastrado");
+			}
+			Usuario user = usuarios.get(login);
+			if(user.getClass().equals(Noob.class)){
+				throw new Exception("usuario ja eh noob");
+			}
+			if(user.getX2p() > 1000){
+				throw new Exception("usuario ainda tem pontos suficientes para ser veterano");
+			}
+			user.downgrade();//chamada polimorfica
 		}
 
 		@Override

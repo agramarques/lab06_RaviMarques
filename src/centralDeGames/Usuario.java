@@ -37,6 +37,7 @@ public class Usuario {
 			this.setCreditos(this.getCreditos() - precoComDesconto);
 			this.getComprados().put(novo.getNome(), novo);
 			this.x2p += status.getAddX2p(novo);	//chamada polimorfica
+			this.atualizaStatus();
 		}	
 	}
 	
@@ -54,16 +55,18 @@ public class Usuario {
 		}
 	}
 	
-	public void punir(String nomeJogo, int scoreObtido, boolean zerou){
+	public void punir(String nomeJogo, int scoreObtido, boolean zerou) throws Exception{
 		Jogo jogo = comprados.get(nomeJogo);
 		int deducao = status.punir(jogo, scoreObtido, zerou);	//chamada polimorfica
 		this.x2p += deducao;
+		this.registraJogada(nomeJogo, scoreObtido, zerou);
 	}
 	
-	public void recompensar(String nomeJogo, int scoreObtido, boolean zerou){
+	public void recompensar(String nomeJogo, int scoreObtido, boolean zerou) throws Exception{
 		Jogo jogo = comprados.get(nomeJogo);
 		int acrescimo = status.recompensar(jogo, scoreObtido, zerou);	//chamada polimorfica
 		this.x2p += acrescimo;
+		this.registraJogada(nomeJogo, scoreObtido, zerou);
 	}
 	
 	/**
@@ -80,8 +83,16 @@ public class Usuario {
 		else{
 			int acrescimoX2p = comprados.get(nomeDoJogo).registraJogada(score, zerou);	//chamada polimorfica
 			this.x2p += acrescimoX2p;	//pontua pela jogada
-			this.punir(nomeDoJogo, score, zerou);	//pune pela jogada
-			this.recompensar(nomeDoJogo, score, zerou);	//recompensa pela jogada
+			this.atualizaStatus();
+		}
+	}
+	
+	private void atualizaStatus(){
+		if(this.x2p >= 1000){
+			this.upgrade();
+		}
+		else{
+			this.downgrade();
 		}
 	}
 

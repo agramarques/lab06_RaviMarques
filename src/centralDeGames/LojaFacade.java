@@ -1,15 +1,31 @@
 package centralDeGames;
 
+import easyaccept.EasyAccept;
+
 public class LojaFacade {
 
-	private LojaController controller;
-
+	private static LojaController controller = new LojaController();
+	
+	public static void main(String[] args){
+		args = new String[] { "centralDeGames.LojaFacade", "acceptance_test/us1.txt", "acceptance_test/us2.txt",  "acceptance_test/us3.txt" };
+		EasyAccept.main(args);
+		//System.out.println(controller.buscaUsuario("despoina.solaris").getComprados().get("Marvel vs Capcom").getModos());
+	}
+	
 	public void adicionaUsuario(Usuario u) {
 		controller.adicionaUsuario(u);
 	}
 
-	public void creditaUsuario(String login, double valor) {
+	public void adicionaCredito(String login, double valor) {
 		controller.creditaUsuario(login, valor);
+	}
+	
+	public double confereCredito(String login) {
+		return controller.checaCredito(login);
+	}
+
+	public int getX2p(String login) {
+		return controller.getX2p(login);
 	}
 
 	public Usuario criaUsuario(String nome, String login, String nivel) {
@@ -20,15 +36,23 @@ public class LojaFacade {
 		return controller.criaJogo(nome, preco, tipo, modos);
 	}
 
-	public void venderJogo(String login, String nome, double preco, TiposDeJogo tipo, String modos) throws Exception {
-		controller.venderJogo(login, nome, preco, tipo, modos);
+	public void vendeJogo(String jogoNome, double preco, String jogabilidades, String estiloJogo, String loginUser) throws Exception {
+		controller.venderJogo(loginUser, jogoNome, preco, estiloJogo, jogabilidades);
+	}
+
+	public void punir(String login, String nomeJogo, int scoreObtido, boolean zerou) throws Exception {
+		controller.punir(login, nomeJogo, scoreObtido, zerou);
+	}
+
+	public void recompensar(String login, String nomeJogo, int scoreObtido, boolean zerou) throws Exception {
+		controller.recompensar(login, nomeJogo, scoreObtido, zerou);
 	}
 
 	public Usuario buscaUsuario(String login) {
 		return controller.buscaUsuario(login);
 	}
 
-	public void upgradeUsuario(String login) throws Exception {
+	public void upgrade(String login) throws Exception {
 		controller.upgradeUsuario(login);
 	}
 
