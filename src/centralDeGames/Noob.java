@@ -38,5 +38,10 @@ public class Noob implements TipoDeUsuario{
 	public int getAddX2p(Jogo jogo) {
 		return (int)(10*jogo.getPreco());
 	}
+
+	@Override
+	public String getStatus() {
+		return "Noob";
+	}
 	
 }

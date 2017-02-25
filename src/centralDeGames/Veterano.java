@@ -35,4 +35,9 @@ public class Veterano implements TipoDeUsuario{
 	public int getAddX2p(Jogo jogo) {
 		return (int)(15*jogo.getPreco());
 	}
+
+	@Override
+	public String getStatus() {
+		return "Veterano";
+	}
 }

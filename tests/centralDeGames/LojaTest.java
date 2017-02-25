@@ -8,21 +8,21 @@ import org.junit.Test;
 public class LojaTest { //obs.: testando apenas o metodo upgradeUsuario, as demais delegam para Usuario
 
 	private LojaController lojaController;
-	Noob u1;
+	Usuario u1;
 	
 	@Before
 	public void criaLoja() throws Exception {
 		lojaController = new LojaController();
-		u1 = new Noob("joao", "joao");
+		u1 = new Usuario("joao", "joao");
+		u1.setStatus(new Noob());
 	}
 	
 	@Test
 	public void testUpgradeUsuario() throws Exception {
 		u1.setX2p(1000);
 		lojaController.adicionaUsuario(u1);
-		lojaController.upgradeUsuario(u1);
-		Usuario upgraded = lojaController.buscaUsuario(u1.getLogin());
-		assertTrue(upgraded.getClass().equals(Veterano.class)); //checa que a classe do usuario cadastrado com aquele login mudou para Veterano
+		lojaController.upgradeUsuario(u1.getLogin());
+		assertEquals("Veterano", u1.getStatus());
 	}
 
 	@Test
@@ -30,7 +30,7 @@ public class LojaTest { //obs.: testando apenas o metodo upgradeUsuario, as dema
 		
 		//tenta fazer upgrade de um usuario nao cadastrado
 		try {
-			lojaController.upgradeUsuario(u1);
+			lojaController.upgradeUsuario(u1.getLogin());
 			fail();
 		}
 		catch (Exception e){
@@ -42,21 +42,11 @@ public class LojaTest { //obs.: testando apenas o metodo upgradeUsuario, as dema
 		
 		//usuario cadastrado, mas com pontuacao insuficiente
 		try {
-			lojaController.upgradeUsuario(u1);
+			lojaController.upgradeUsuario(u1.getLogin());
 			fail();
 		}
 		catch (Exception e){
 			assertEquals("usuario nao tem pontos suficientes para upgrade", e.getMessage());
-		}
-		
-		Veterano u2 = new Veterano("maria", "maria");
-		//tenta fazer upgrade de um Veterano
-		try {
-			lojaController.upgradeUsuario(u2);
-			fail();
-		}
-		catch (Exception e){
-			assertEquals("usuario ja eh veterano", e.getMessage());
 		}
 		
 	}

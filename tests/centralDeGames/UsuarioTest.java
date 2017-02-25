@@ -5,13 +5,13 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class NoobTest {
+public class UsuarioTest {
 	
-	private Noob user;
+	private Usuario user;
 	
 	@Before
 	public void criaNoob() throws Exception{
-		user = new Noob("joao", "joao");
+		user = new Usuario("joao", "joao");
 	}
 
 	@Test

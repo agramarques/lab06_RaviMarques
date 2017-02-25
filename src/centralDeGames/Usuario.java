@@ -151,18 +151,17 @@ public class Usuario {
 		this.x2p = x2p;
 	}
 
-	public TipoDeUsuario getStatus() {
-		return status;
+	public String getStatus() {
+		return status.getStatus();
 	}
 
 	public void setStatus(TipoDeUsuario status) {
 		this.status = status;
 	}
 
-	//ajustar o toString para o Usuario geral ou incluir na interface TipoDeUsuario
 	@Override
 	public String toString(){
-		return this.getLogin() + '\n' + this.getNome() + " - Jogador Veterano\n" + "Lista de Jogos:\n" + this.getComprados() + "\n\n" + "Total de preco dos jogos: R$" + this.calculaPrecoTotalJogos();
+		return this.getLogin() + '\n' + this.getNome() + " - Jogador" + this.getStatus() + "\n" + "Lista de Jogos:\n" + this.getComprados() + "\n\n" + "Total de preco dos jogos: R$" + this.calculaPrecoTotalJogos();
 	}
 
 	@Override

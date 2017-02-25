@@ -7,4 +7,5 @@ public interface TipoDeUsuario {
 	public int recompensar(Jogo jogo, int scoreObtido, boolean zerou);
 	public double getPrecoComDesconto(Jogo jogo);
 	public int getAddX2p(Jogo jogo);
+	public String getStatus();
 }
